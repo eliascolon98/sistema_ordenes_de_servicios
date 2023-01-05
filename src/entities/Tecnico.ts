@@ -14,8 +14,8 @@ export class Tecnico extends BaseEntity{
     @Column()
     nombre: string
 
-    @Column()
-    disponibilidad: string;
+    @Column({default: true})
+    disponibilidad: boolean;
 
     @CreateDateColumn()
     createat: Date;

@@ -4,11 +4,10 @@ import { Tecnico } from '../entities/Tecnico';
 
 export const postTecnicos = async (req: Request, res: Response) => {
     try {
-        const { nombre, disponibilidad } = req.body;
+        const { nombre } = req.body;
         const tecnico = new Tecnico()
 
         tecnico.nombre = nombre
-        tecnico.disponibilidad = disponibilidad
         await tecnico.save()
 
         return res.status(200).json({message: '¡El tecnico se ha registrado exitosamente!'})
