@@ -1,0 +1,15 @@
+# compiled output
+/dist
+/node_modules
+/postgres_data
+/database_dat
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ORM config
+!ormconfig.js
