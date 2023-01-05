@@ -12,7 +12,10 @@ app.use(express.json())
 
 // Routes
 import  clienteRoutes  from './routes/cliente.routes';
+import  tecnicoRoutes  from './routes/tecnico.routes';
+
 app.use(clienteRoutes);
+app.use(tecnicoRoutes);
 
 
 export default app;
