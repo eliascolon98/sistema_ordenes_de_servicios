@@ -1,0 +1,30 @@
+version: "3"
+services: 
+  postgresql2:
+    image: postgres:13
+    container_name: 'postgresql_solicitudes'
+    restart: always
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=eliascolon98
+      - POSTGRES_DB=ordenes_servicios_bd
+    volumes:
+      - pgdata:/data/postgresql2
+    ports: 
+      - 5432:5432
+  appbackend_solicitud:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: node
+    container_name: 'appbackendsolicitud'
+    environment: 
+      - DB_HOST=postgresql2
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - postgresql2
+volumes:
+  pgdata:
+    driver: local

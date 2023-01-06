@@ -225,8 +225,49 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Elimina un cliente en particular a partir de su ID",
+        "description": "Se elimina un cliente especifico y se retorna un json indicado si se eliminó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se ha elminado correctamente el cliente.",
+            "schema": {
+              "$ref": "#/definitions/clienteEliminado"
+            }
+          },
+          "500": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          }
+        }
       }
     },
+    
     "/tecnicos": {
       "post": {
         "tags": [
@@ -629,6 +670,17 @@
         "message": {
           "type": "string",
           "example": "¡El cliente se ha actualizado exitosamente!"
+        }
+      }
+    },
+    "clienteEliminado": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "¡El cliente se ha eliminado exitosamente!"
         }
       }
     },
