@@ -6,23 +6,23 @@ import {
     BaseEntity
 } from 'typeorm'
 
-@Entity()
-export class Cliente extends BaseEntity{
-    @PrimaryGeneratedColumn()
-    id: number;
+@Entity() // se marca la clase como una entidad de base de datos
+export class Cliente extends BaseEntity{ // se exporta la clase "Cliente" que hereda de la clase "BaseEntity"
+    @PrimaryGeneratedColumn() // se marca la propiedad "id" como la columna principal y se genera su valor automáticamente
+    id: number; // se declara una propiedad "id" de tipo número
 
-    @Column()
-    nombre: string
+    @Column() // se marca la propiedad "nombre" como una columna de la tabla de base de datos
+    nombre: string // se declara una propiedad "nombre" de tipo cadena
 
-    @Column()
-    direccion: string;
+    @Column() // se marca la propiedad "direccion" como una columna de la tabla de base de datos
+    direccion: string; // se declara una propiedad "direccion" de tipo cadena
 
-    @Column({unique: true})
-    correo: string;
+    @Column({unique: true}) // se marca la propiedad "correo" como una columna de la tabla de base de datos con una restricción de unicidad
+    correo: string; // se declara una propiedad "correo" de tipo cadena
 
-    @Column({unique: true})
-    telefono: number;
+    @Column({unique: true}) // se marca la propiedad "telefono" como una columna de la tabla de base de datos con una restricción de unicidad
+    telefono: number; // se declara una propiedad "telefono" de tipo número
 
-    @CreateDateColumn()
-    createat: Date;
+    @CreateDateColumn() // se marca la propiedad "createat" como una columna de tipo fecha y se genera su valor automáticamente con la fecha actual
+    createat: Date; // se declara una propiedad "createat" de tipo fecha
 }

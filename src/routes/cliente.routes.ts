@@ -1,12 +1,18 @@
 import {Router} from 'express';
 import { postClientes, getClientes, getCliente, putClientes, deleteClientes } from '../controllers/cliente.controllers';
+
 const router = Router();
 
-router.post('/api/v1/clientes',postClientes)
-router.get('/api/v1/clientes', getClientes)
-router.get('/api/v1/clientes/:id', getCliente)
-router.put('/api/v1/clientes/:id', putClientes)
-router.delete('/api/v1/clientes/:id', deleteClientes)
+// se establece una ruta POST para la dirección "/api/v1/clientes" que ejecuta la función "postClientes"
+router.post('/api/v1/clientes',postClientes);
+// se establece una ruta GET para la dirección "/api/v1/clientes" que ejecuta la función "getClientes"
+router.get('/api/v1/clientes', getClientes);
+// se establece una ruta GET para la dirección "/api/v1/clientes/:id" que ejecuta la función "getCliente"
+router.get('/api/v1/clientes/:id', getCliente);
+// se establece una ruta PUT para la dirección "/api/v1/clientes/:id" que ejecuta la función "putClientes"
+router.put('/api/v1/clientes/:id', putClientes);
+// se establece una ruta DELETE para la dirección "/api/v1/clientes/:id" que ejecuta la función "deleteClientes"
+router.delete('/api/v1/clientes/:id', deleteClientes);
 
-
+// se exporta el enrutador
 export default router
