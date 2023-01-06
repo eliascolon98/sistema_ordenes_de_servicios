@@ -20,6 +20,8 @@ app.use(servicioRoutes); // se usan las rutas para la entidad "Servicio"
 
 // Ruta para ver la documentación de los endpoints con Swagger
 const swaggerDocument: any = require('../swagger.json');
+// const swaggerDocument2: any = require('../swagger2.json');
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api/v1/docs2', swaggerUi.serve, swaggerUi.setup(swaggerDocument2));
 
 export default app; // se exporta la aplicación

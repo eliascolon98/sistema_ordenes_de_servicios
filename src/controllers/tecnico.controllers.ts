@@ -32,7 +32,7 @@ export const getTecnicos = async (req: Request, res: Response) => {
         const tecnicos = await Tecnico.find()
 
         // se envía una respuesta HTTP con un código de estado 200 y la lista de tecnicos en formato JSON
-        return res.json(tecnicos);
+        return res.json({data: tecnicos});
 
     } catch (error) {
         if(error instanceof Error){

@@ -38,7 +38,7 @@ export const postServicios = async (req: Request, res: Response) => {
         // Guardamos los datos del servicio
         await servicio.save()
 
-        return res.status(200).json({ message: '¡El servicio se ha registrado exitosamente!' })
+        return res.status(200).json({ message: '¡El servicio se ha registrado exitosamente! su número de ticket es #' + servicio.id })
 
     } catch (error) {
         if (error instanceof Error) {
@@ -72,7 +72,7 @@ export const getServicios = async (req: Request, res: Response) => {
             TecnicoAsigado: servicio.tecnico.nombre,
         }));
 
-        return res.status(200).json(servicesData);
+        return res.status(200).json({services: servicesData});
 
     } catch (error) {
         if (error instanceof Error) {
@@ -113,7 +113,7 @@ export const getServicio = async (req: Request, res: Response) => {
         // Validamos si el arreglo que trae los servicios del tecnico es igual a 0, quiere decir que no tiene servicios asignados
         if(servicesData.length == 0) return res.status(200).json({message: 'Usted no tiene ningún servicio asignado.'});
 
-        return res.json(servicesData);
+        return res.json({services: servicesData});
 
     } catch (error) {
         if (error instanceof Error) {

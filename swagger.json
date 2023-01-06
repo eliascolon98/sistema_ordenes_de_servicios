@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "host": "localhost:3000",
-  "basePath": "/api/v1/docs/",
+  "basePath": "/api/v1/",
   "info": {
     "description": "Esta API permite a los usuarios registrar y gestionar clientes y técnicos, así como crear y gestionar solicitudes de servicio.",
     "version": "1.0",
@@ -18,6 +18,10 @@
     {
       "name": "Tecnicos",
       "description": "Endpoints para Tecnicos"
+    },
+    {
+      "name": "Solicitudes",
+      "description": "Endpoints para las solicitudes de servicios"
     }
   ],
   "schemes": [
@@ -38,72 +42,52 @@
           "Clientes"
         ],
         "summary": "Registra un nuevo cliente en la base de datos",
-        
+        "description": "Se crea un cliente nuevo y se retorna un json indicado si se guardó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
-            "name": "nombre",
             "in": "body",
-            "description": "El nombre del cliente",
-            "required": true,
+            "name": "body",
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "direccion",
-            "in": "body",
-            "description": "La dirección del cliente",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "correo",
-            "in": "body",
-            "description": "El correo electrónico del cliente",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "telefono",
-            "in": "body",
-            "description": "El número de teléfono del cliente",
-            "required": true,
-            "schema": {
-              "type": "integer"
+              "properties": {
+                "nombre": {
+                  "type": "string",
+                  "example": "Elias Colon"
+                },
+                "direccion": {
+                  "type": "string",
+                  "example": "Calle 22"
+                },
+                "correo": {
+                  "type": "string",
+                  "example": "eliascolon98@gmail.com"
+                },
+                "phone": {
+                  "type": "number",
+                  "example": "3185466115"
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Cliente registrado exitosamente",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": {
-                      "message": "¡El cliente se ha registrado exitosamente!"
-                    }
-                  }
-                }
-              }
+            "description": "Se ha realizado correctamente y creado un nuevo cliente.",
+            "schema": {
+              "$ref": "#/definitions/clienteCreado"
             }
           },
           "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al registrar el cliente"
-                    }
-                  }
-                }
-              }
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
@@ -113,60 +97,39 @@
           "Clientes"
         ],
         "summary": "Obtiene una lista de todos los clientes registrados en la base de datos",
-        "operationId": "getservice",
+        "description": "Este listado obtiene todo los tecnicos en la base de datos.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "Lista de clientes obtenida con éxito",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": [
-                      {
-                        "id": 1,
-                        "nombre": "Juan Pérez",
-                        "direccion": "Calle Falsa 123",
-                        "correo": "juan@gmail.com",
-                        "telefono": 12345678,
-                        "createat": "2022-01-01T00:00:00.000Z"
-                      },
-                      {
-                        "id": 2,
-                        "nombre": "Ana Martínez",
-                        "direccion": "Calle Falsa 456",
-                        "correo": "ana@gmail.com",
-                        "telefono": 87654321,
-                        "createat": "2022-01-02T00:00:00.000Z"
-                      }
-                    ]
-                  }
-                }
-              }
+            "description": "la solicitud se ha realizado correctamente.",
+            "schema": {
+              "$ref": "#/definitions/crearCliente"
             }
           },
-          "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al obtener la lista de clientes"
-                    }
-                  }
-                }
-              }
+          "400": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          },
+          "404": {
+            "description": "Pentición no fue encontrada.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
       }
     },
-    "clientes/{id}": {
+    "/clientes/{id}": {
       "get": {
         "tags": [
           "Clientes"
         ],
         "summary": "Obtiene la información de un cliente en particular a partir de su ID",
+        "description": "Obtiene cliente especifico según el ID en la base de datos.",
         "parameters": [
           {
             "name": "id",
@@ -180,50 +143,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Información del cliente obtenida con éxito",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": {
-                      "id": 1,
-                      "nombre": "Juan Pérez",
-                      "direccion": "Calle Falsa 123",
-                      "correo": "juanperez@gmail.com",
-                      "telefono": 12345678,
-                      "createat": "2022-01-01T00:00:00.000Z"
-                    }
-                  }
-                }
-              }
+            "description": "la solicitud se ha realizado correctamente.",
+            "schema": {
+              "$ref": "#/definitions/crearCliente"
+            }
+          },
+          "400": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           },
           "404": {
-            "description": "Cliente no encontrado",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "not found": {
-                    "value": {
-                      "message": "No se ha encontrado ningún cliente con el ID especificado"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al obtener la información del cliente"
-                    }
-                  }
-                }
-              }
+            "description": "Pentición no fue encontrada.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
@@ -233,6 +167,15 @@
           "Clientes"
         ],
         "summary": "Actualiza la información de un cliente en particular a partir de su ID",
+        "description": "Se actualiza un cliente especifico y se retorna un json indicado si se actualizó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -244,133 +187,86 @@
             }
           },
           {
-            "name": "nombre",
             "in": "body",
-            "description": "El nuevo nombre del cliente",
-            "required": true,
+            "name": "body",
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "direccion",
-            "in": "body",
-            "description": "La nueva dirección del cliente",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "correo",
-            "in": "body",
-            "description": "El nuevo correo electrónico del cliente",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "telefono",
-            "in": "body",
-            "description": "El nuevo número de teléfono del cliente",
-            "required": true,
-            "schema": {
-              "type": "integer"
+              "properties": {
+                "nombre": {
+                  "type": "string",
+                  "example": "Elias Colon"
+                },
+                "direccion": {
+                  "type": "string",
+                  "example": "Calle 22"
+                },
+                "correo": {
+                  "type": "string",
+                  "example": "eliascolon98@gmail.com"
+                },
+                "phone": {
+                  "type": "number",
+                  "example": "3185466115"
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Información del cliente actualizada con éxito",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": {
-                      "message": "¡Cliente actualizado exitosamente!"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Cliente no encontrado",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "not found": {
-                    "value": {
-                      "message": "No se ha encontrado ningún cliente con el ID especificado"
-                    }
-                  }
-                }
-              }
+            "description": "Se ha actualizado correctamente el cliente.",
+            "schema": {
+              "$ref": "#/definitions/clienteActualizado"
             }
           },
           "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al actualizar la información del cliente"
-                    }
-                  }
-                }
-              }
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
       }
     },
-   
     "/tecnicos": {
       "post": {
         "tags": [
           "Tecnicos"
         ],
         "summary": "Registra un nuevo tecnico en la base de datos",
+        "description": "Se crea un tecnico nuevo y se retorna un json indicado si se guardó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
-            "name": "nombre",
             "in": "body",
-            "description": "El nombre del tecnico",
-            "required": true,
+            "name": "body",
             "schema": {
-              "type": "string"
+              "properties": {
+                "nombre": {
+                  "type": "string",
+                  "example": "Elias Colon"
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Tecnico registrado exitosamente",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": {
-                      "message": "¡El tecnico se ha registrado exitosamente!"
-                    }
-                  }
-                }
-              }
+            "description": "Se ha realizado correctamente y creado un nuevo tecnico.",
+            "schema": {
+              "$ref": "#/definitions/tecnicoCreado"
             }
           },
           "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al registrar el tecnico"
-                    }
-                  }
-                }
-              }
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
@@ -380,44 +276,27 @@
           "Tecnicos"
         ],
         "summary": "Obtiene una lista de todos los tecnicos registrados en la base de datos",
+        "description": "Este listado obtiene todo los tecnicos en la base de datos.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
-            "description": "Lista de tecnicos obtenida con éxito",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": [
-                      {
-                        "id": 1,
-                        "nombre": "Juan Pérez",
-                        "disponibilidad": true,
-                        "createat": "2022-01-01T00:00:00.000Z"
-                      },
-                      {
-                        "id": 2,
-                        "nombre": "Ana Martínez",
-                        "disponibilidad": true,
-                        "createat": "2022-01-02T00:00:00.000Z"
-                      }
-                    ]
-                  }
-                }
-              }
+            "description": "la solicitud se ha realizado correctamente.",
+            "schema": {
+              "$ref": "#/definitions/crearTecnico"
             }
           },
-          "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al obtener la lista de tecnicos"
-                    }
-                  }
-                }
-              }
+          "400": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          },
+          "404": {
+            "description": "Pentición no fue encontrada.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
@@ -429,6 +308,7 @@
           "Tecnicos"
         ],
         "summary": "Obtiene la información de un tecnico en particular a partir de su ID",
+        "description": "Obtiene tecnico especifico según el ID en la base de datos.",
         "parameters": [
           {
             "name": "id",
@@ -442,48 +322,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Información del tecnico obtenida con éxito",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": {
-                      "id": 1,
-                      "nombre": "Juan Pérez",
-                      "disponibilidad": true,
-                      "createat": "2022-01-01T00:00:00.000Z"
-                    }
-                  }
-                }
-              }
+            "description": "la solicitud se ha realizado correctamente.",
+            "schema": {
+              "$ref": "#/definitions/crearTecnico"
+            }
+          },
+          "400": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           },
           "404": {
-            "description": "Tecnico no encontrado",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "not found": {
-                    "value": {
-                      "message": "No se ha encontrado ningún tecnico con el ID especificado"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al obtener la información del tecnico"
-                    }
-                  }
-                }
-              }
+            "description": "Pentición no fue encontrada.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
             }
           }
         }
@@ -493,6 +346,15 @@
           "Tecnicos"
         ],
         "summary": "Actualiza la información de un tecnico en particular a partir de su ID",
+        "description": "Se actualiza un tecnico especifico y se retorna un json indicado si se actualizó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -504,67 +366,368 @@
             }
           },
           {
-            "name": "nombre",
             "in": "body",
-            "description": "El nuevo nombre del tecnico",
-            "required": true,
+            "name": "body",
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "disponibilidad",
-            "in": "body",
-            "description": "La nueva disponibilidad del tecnico",
-            "required": false,
-            "schema": {
-              "type": "boolean"
+              "properties": {
+                "nombre": {
+                  "type": "string",
+                  "example": "Elias Colon"
+                },
+                "disponibilidad": {
+                  "type": "string",
+                  "example": true
+                }
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Información del tecnico actualizada con éxito",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "success": {
-                    "value": {
-                      "message": "¡Tecnico actualizado exitosamente!"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Tecnico no encontrado",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "not found": {
-                    "value": {
-                      "message": "No se ha encontrado ningún tecnico con el ID especificado"
-                    }
-                  }
-                }
-              }
+            "description": "Se ha actualizado correctamente el tecnico.",
+            "schema": {
+              "$ref": "#/definitions/tecnicoActualizado"
             }
           },
           "500": {
-            "description": "Error interno del servidor",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "server error": {
-                    "value": {
-                      "message": "Error al actualizar la información del tecnico"
-                    }
-                  }
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          }
+        }
+      }
+    },
+    "/solicitudes": {
+      "post": {
+        "tags": [
+          "Solicitudes"
+        ],
+        "summary": "Crea una nueva solicitud de servicio",
+        "description": "Se crea una nueva solicitud y se retorna un json indicado si se guardó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "id_cliente": {
+                  "type": 12,
+                  "example": 12
+                },
+                "descripcion": {
+                  "type": "string",
+                  "example": "Arreglar TV "
                 }
               }
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se ha realizado correctamente y creado un nuevo servicio.",
+            "schema": {
+              "$ref": "#/definitions/servicioCreado"
+            }
+          },
+          "500": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          }
+        }
+       
+      },
+      "get": {
+        "tags": [
+          "Solicitudes"
+        ],
+        "summary": "Obtiene la información de todas las solicitudes de servicio",
+        "description": "Este listado obtiene todo los servicios creados en la base de datos.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "la solicitud se ha realizado correctamente.",
+            "schema": {
+              "$ref": "#/definitions/servicios"
+            }
+          },
+          "400": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          },
+          "404": {
+            "description": "Pentición no fue encontrada.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          }
+        }
+      }
+    },
+    "/tecnicos/{id}/solicitudes": {
+      "get": {
+        "tags": [
+          "Solicitudes"
+        ],
+        "summary": "Obtiene la información de las solicitudes asignadas a un tecnico en particular a partir de su ID",
+        "description": "Obtiene solicitudes especificas según el ID en la base de datos.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del tecnico",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado de servicios.",
+            "schema": {
+              "$ref": "#/definitions/serviciosTecnico"
+            }
+          },
+          "400": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          },
+          "404": {
+            "description": "Pentición no fue encontrada.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          }
+        }
+      }
+    },
+    "/solicitudes/{token}": {
+      "put": {
+        "tags": [
+          "Solicitudes"
+        ],
+        "summary": "Actualiza el estado de un tecnico a solicitud en particular a partir de su token",
+        "description": "Actualiza el estado de un tecnico especifico y se retorna un json indicado si se actualizó con exito o no.",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "El token de la solicitu",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "estado": {
+                  "type": "string",
+                  "example": "Completado"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se ha actualizado correctamente el estado de la solicitud.",
+            "schema": {
+              "$ref": "#/definitions/servicioActualizado"
+            }
+          },
+          "500": {
+            "description": "El servidor no pudo entender la solicitud debido a una sintaxis incorrecta.",
+            "schema": {
+              "$ref": "#/definitions/errorRespuesta"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "crearCliente": {
+      "required": [],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "example": {
+              "id": 2,
+              "nombre": "Elias Colon",
+              "direccion": "Carrera 8b",
+              "correo": "eliascolon98@gmail.com",
+              "telefono": 300882829,
+              "createat": "2023-01-05T17:15:42.890Z"
+            }
+          }
+        }
+      }
+    },
+    "crearTecnico": {
+      "required": [],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "example": {
+              "id": 1,
+              "names": "Elias",
+              "disponibilidad": true,
+              "created_at": "2022-01-26T12:22:08.288Z"
+            }
+          }
+        }
+      }
+    },
+    "clienteCreado": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "¡El cliente se ha registrado exitosamente!"
+        }
+      }
+    },
+    "clienteActualizado": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "¡El cliente se ha actualizado exitosamente!"
+        }
+      }
+    },
+    "tecnicoCreado": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "¡El tecnico se ha registrado exitosamente!"
+        }
+      }
+    },
+    "tecnicoActualizado": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "¡El tecnico se ha actualizado exitosamente!"
+        }
+      }
+    },
+    "servicios": {
+      "required": [
+        "title",
+        "description"
+      ],
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "example": {
+              "id": 9,
+              "token": "fa4edbd123e29671efe3cb957e7069a748ff3ecf",
+              "descripcion": "arreglar estufa",
+              "estado": "Completado",
+              "cliente": "Elias Colon",
+              "TecnicoAsigado": "Juancho"
+            }
+          }
+        }
+      }
+    },
+    "servicioCreado": {
+      "required": [
+        "id_cliente",
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Se ha registrado correctamente su número de ticket es 9"
+        }
+      }
+    },
+    "serviciosTecnico": {
+      "required": [
+        "title",
+        "description"
+      ],
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "example": {
+              "id": 9,
+              "token": "fa4edbd123e29671efe3cb957e7069a748ff3ecf",
+              "descripcion": "arreglar estufa",
+              "estado": "Completado",
+              "cliente": "Elias Colon"
+            }
+          }
+        }
+      }
+    },
+    "servicioActualizado": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Estado actualizado exitosamente!"
+        }
+      }
+    },
+    "errorRespuesta": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Error al procesar la petición al servidor + error especifico"
         }
       }
     }

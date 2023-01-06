@@ -35,7 +35,7 @@ export const getClientes = async (req: Request, res: Response) => {
         const clientes = await Cliente.find()
 
         // se envía una respuesta HTTP con un código de estado 200 y la lista de clientes en formato JSON
-        return res.status(200).json(clientes);
+        return res.status(200).json({data: clientes});
 
     } catch (error) {
         if(error instanceof Error){
