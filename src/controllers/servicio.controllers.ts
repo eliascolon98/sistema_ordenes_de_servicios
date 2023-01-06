@@ -11,23 +11,7 @@ export const postServicios = async (req: Request, res: Response) => {
         const { id_cliente, descripcion } = req.body;
         const servicio = new Servicio();
         const token = genearToken();
-
-        // Consultar tecnicos disponibles
-        const tecnicos = await Tecnico.find({
-            where: {
-                disponibilidad: true
-            }
-        })
-
-        // Creamos un array donde se almacenen los Id de los tecnicos disponibles
-        let arrayIdTecnicos = [];
-        for (const tecnico of tecnicos) {
-            arrayIdTecnicos.push(tecnico.id);
-        }
-
-        // Buscamos un Id de forma aleatoria de los tecnicos disponibles
-        const randomIndex = Math.floor(Math.random() * arrayIdTecnicos.length);
-        const id_tecnico: any = arrayIdTecnicos[randomIndex];
+        const id_tecnico:any = await retortarTecnicoAleatorio();
 
         servicio.token = token;
         servicio.cliente = id_cliente;
@@ -94,7 +78,6 @@ export const getServicio = async (req: Request, res: Response) => {
         const servicios = await Servicio.find({
             relations: {
                 cliente: true,
-
             },
             where:{
                 tecnico: {id: parseInt(id)},
@@ -160,3 +143,24 @@ export const genearToken = () => {
     return crypto.createHash('sha1').update(Math.random().toString()).digest('hex');
 }
 
+
+// Funcion para retornar el id de un tecnico de forma aleatoria
+export const retortarTecnicoAleatorio = async () => {
+    // Consultar tecnicos disponibles
+    const tecnicos = await Tecnico.find({
+        where: {
+            disponibilidad: true
+        }
+    })
+
+    // Creamos un array donde se almacenen los Id de los tecnicos disponibles
+    let arrayIdTecnicos = [];
+    for (const tecnico of tecnicos) {
+        arrayIdTecnicos.push(tecnico.id);
+    }
+
+    // Buscamos un Id de forma aleatoria de los tecnicos disponibles
+    const randomIndex = Math.floor(Math.random() * arrayIdTecnicos.length);
+    return arrayIdTecnicos[randomIndex];
+    
+}
