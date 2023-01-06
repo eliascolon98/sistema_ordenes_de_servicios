@@ -1,0 +1,572 @@
+{
+  "swagger": "2.0",
+  "host": "localhost:3000",
+  "basePath": "/api/v1/docs/",
+  "info": {
+    "description": "Esta API permite a los usuarios registrar y gestionar clientes y técnicos, así como crear y gestionar solicitudes de servicio.",
+    "version": "1.0",
+    "title": "API REST SOLITUD DE SERVICIOS",
+    "contact": {
+      "email": "eliascolon98@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Clientes",
+      "description": "Endpoints para Clientes"
+    },
+    {
+      "name": "Tecnicos",
+      "description": "Endpoints para Tecnicos"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/clientes": {
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Registra un nuevo cliente en la base de datos",
+        
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "body",
+            "description": "El nombre del cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direccion",
+            "in": "body",
+            "description": "La dirección del cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correo",
+            "in": "body",
+            "description": "El correo electrónico del cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "telefono",
+            "in": "body",
+            "description": "El número de teléfono del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente registrado exitosamente",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": {
+                      "message": "¡El cliente se ha registrado exitosamente!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al registrar el cliente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Obtiene una lista de todos los clientes registrados en la base de datos",
+        "operationId": "getservice",
+        "responses": {
+          "200": {
+            "description": "Lista de clientes obtenida con éxito",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "nombre": "Juan Pérez",
+                        "direccion": "Calle Falsa 123",
+                        "correo": "juan@gmail.com",
+                        "telefono": 12345678,
+                        "createat": "2022-01-01T00:00:00.000Z"
+                      },
+                      {
+                        "id": 2,
+                        "nombre": "Ana Martínez",
+                        "direccion": "Calle Falsa 456",
+                        "correo": "ana@gmail.com",
+                        "telefono": 87654321,
+                        "createat": "2022-01-02T00:00:00.000Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al obtener la lista de clientes"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "clientes/{id}": {
+      "get": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Obtiene la información de un cliente en particular a partir de su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información del cliente obtenida con éxito",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": 1,
+                      "nombre": "Juan Pérez",
+                      "direccion": "Calle Falsa 123",
+                      "correo": "juanperez@gmail.com",
+                      "telefono": 12345678,
+                      "createat": "2022-01-01T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente no encontrado",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "not found": {
+                    "value": {
+                      "message": "No se ha encontrado ningún cliente con el ID especificado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al obtener la información del cliente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Actualiza la información de un cliente en particular a partir de su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "nombre",
+            "in": "body",
+            "description": "El nuevo nombre del cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direccion",
+            "in": "body",
+            "description": "La nueva dirección del cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "correo",
+            "in": "body",
+            "description": "El nuevo correo electrónico del cliente",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "telefono",
+            "in": "body",
+            "description": "El nuevo número de teléfono del cliente",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información del cliente actualizada con éxito",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": {
+                      "message": "¡Cliente actualizado exitosamente!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente no encontrado",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "not found": {
+                    "value": {
+                      "message": "No se ha encontrado ningún cliente con el ID especificado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al actualizar la información del cliente"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+   
+    "/tecnicos": {
+      "post": {
+        "tags": [
+          "Tecnicos"
+        ],
+        "summary": "Registra un nuevo tecnico en la base de datos",
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "body",
+            "description": "El nombre del tecnico",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tecnico registrado exitosamente",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": {
+                      "message": "¡El tecnico se ha registrado exitosamente!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al registrar el tecnico"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Tecnicos"
+        ],
+        "summary": "Obtiene una lista de todos los tecnicos registrados en la base de datos",
+        "responses": {
+          "200": {
+            "description": "Lista de tecnicos obtenida con éxito",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "nombre": "Juan Pérez",
+                        "disponibilidad": true,
+                        "createat": "2022-01-01T00:00:00.000Z"
+                      },
+                      {
+                        "id": 2,
+                        "nombre": "Ana Martínez",
+                        "disponibilidad": true,
+                        "createat": "2022-01-02T00:00:00.000Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al obtener la lista de tecnicos"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tecnicos/{id}": {
+      "get": {
+        "tags": [
+          "Tecnicos"
+        ],
+        "summary": "Obtiene la información de un tecnico en particular a partir de su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del tecnico",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información del tecnico obtenida con éxito",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": 1,
+                      "nombre": "Juan Pérez",
+                      "disponibilidad": true,
+                      "createat": "2022-01-01T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tecnico no encontrado",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "not found": {
+                    "value": {
+                      "message": "No se ha encontrado ningún tecnico con el ID especificado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al obtener la información del tecnico"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tecnicos"
+        ],
+        "summary": "Actualiza la información de un tecnico en particular a partir de su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "El ID del tecnico",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "nombre",
+            "in": "body",
+            "description": "El nuevo nombre del tecnico",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "disponibilidad",
+            "in": "body",
+            "description": "La nueva disponibilidad del tecnico",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información del tecnico actualizada con éxito",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": {
+                      "message": "¡Tecnico actualizado exitosamente!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tecnico no encontrado",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "not found": {
+                    "value": {
+                      "message": "No se ha encontrado ningún tecnico con el ID especificado"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "server error": {
+                    "value": {
+                      "message": "Error al actualizar la información del tecnico"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
