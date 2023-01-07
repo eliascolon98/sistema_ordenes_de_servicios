@@ -19,7 +19,18 @@ services:
     image: node
     container_name: 'appbackendsolicitud'
     environment: 
-      - DB_HOST=postgresql2
+      # - BD_DRIVE=postgres
+      # - DB_HOST=postgresql2
+      # - BD_PORT=5432'
+      # - BD_USER=postgres
+      # - BD_PASS=eliascolon98
+      # - BD_NAME=ordenes_servicios_bd
+      - BD_DRIVE=postgres
+      - DB_HOST=ordenesserviciosbd.cixqsl9wgrex.us-east-1.rds.amazonaws.com
+      - BD_PORT=5432'
+      - BD_USER=postgres
+      - BD_PASS=ordenes_servicios_bd
+      - BD_NAME=postgres
     restart: always
     ports:
       - "3000:3000"
