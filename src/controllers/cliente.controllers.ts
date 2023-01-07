@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Cliente } from '../entities/Cliente';
+import { Cliente } from '../database/entities/Cliente';
 
 // se exporta una función asíncrona que toma dos argumentos: req (una solicitud) y res (una respuesta)
 export const postClientes = async (req: Request, res: Response) => {
@@ -57,7 +57,12 @@ export const putClientes = async (req: Request, res: Response) => {
 
         // se utiliza el método "update" del modelo "Cliente" para actualizar el cliente en la base de datos con los nuevos datos del cuerpo de la solicitud.
         // Se convierte el ID de cadena a número entero para hacer la actualización
-        await Cliente.update({id: parseInt(id)}, req.body)
+        await Cliente.update({id: parseInt(id)}, {
+            nombre : req.body.nombre,
+            direccion : req.body.direccion,
+            correo : req.body.correo,
+            telefono : req.body.telefono,
+        })
         return res.status(200).json({message: '¡Cliente actualizado exitosamente!'});
 
     } catch (error) {

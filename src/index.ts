@@ -9,9 +9,9 @@ const main = async() =>{
         await AppDataSource.initialize(); 
         // se muestra un mensaje en la consola
         console.log("Conected to database"); 
-        app.listen(3000); // se hace que la aplicación escuche en el puerto 3000
+        app.listen(process.env.PORT || 3000); // se hace que la aplicación escuche en el puerto 3000
          // se muestra un mensaje en la consola
-        console.log("Server is listening on", 3000);
+        console.log("Server is listening on", process.env.PORT || 3000);
     } catch (error) { 
         // se maneja cualquier error que ocurra
         console.log("Error to conected ", error) // se muestra un mensaje en la consola

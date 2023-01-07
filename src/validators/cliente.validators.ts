@@ -18,6 +18,7 @@ export const validarCliente: any = [
         .isEmpty()
         .isEmail(),
     check('telefono')
+        .isLength({ max: 5 })
         .isNumeric()
         .exists()
         .not()

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Tecnico } from '../entities/Tecnico';
+import { Tecnico } from '../database/entities/Tecnico';
 
 // se exporta una función asíncrona que toma dos argumentos: req (una solicitud) y res (una respuesta)
 export const postTecnicos = async (req: Request, res: Response) => {

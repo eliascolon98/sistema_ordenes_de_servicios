@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
-
+require('dotenv').config();
 // se crea una aplicación de express
 const app = express(); 
 app.use(morgan('dev')); // se configura morgan en modo "dev"

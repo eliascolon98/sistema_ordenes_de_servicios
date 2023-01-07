@@ -1,8 +1,8 @@
 
 import { Request, Response } from 'express';
 import crypto from 'crypto';
-import { Servicio } from '../entities/Servicio';
-import { Tecnico } from '../entities/Tecnico';
+import { Servicio } from '../database/entities/Servicio';
+import { Tecnico } from '../database/entities/Tecnico';
 
 export const postServicios = async (req: Request, res: Response) => {
     try {

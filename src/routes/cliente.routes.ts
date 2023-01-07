@@ -11,7 +11,7 @@ router.get('/api/v1/clientes', getClientes);
 // se establece una ruta GET para la dirección "/api/v1/clientes/:id" que ejecuta la función "getCliente"
 router.get('/api/v1/clientes/:id', getCliente);
 // se establece una ruta PUT para la dirección "/api/v1/clientes/:id" que ejecuta la función "putClientes"
-router.put('/api/v1/clientes/:id', validarCliente, putClientes);
+router.put('/api/v1/clientes/:id', putClientes);
 // se establece una ruta DELETE para la dirección "/api/v1/clientes/:id" que ejecuta la función "deleteClientes"
 router.delete('/api/v1/clientes/:id', deleteClientes);
 
