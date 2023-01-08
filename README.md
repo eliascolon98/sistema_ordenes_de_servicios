@@ -10,12 +10,12 @@ $ yarn install
 #Creación del archivo .ENV basado en el archivo .ENV.example
 $ cp .env.example .env
 
-#----------------- Pasos para correr el proyecto ----------------
-#uno:  Si no tiene una base de datos, puede crear una a traves de docker-compose.yml 
+#Notas:
+#Si no tiene una base de datos, puede crear una a traves de docker-compose.yml 
 #archivo basado en el docker-compose.yml.example archivo en el proyecto
 $cp docker-compose.yml.example docker-compose.yml
 
-#Nota: Actualmente la base de datos está conectada a postgres desde una base de datos externa para pruebas
+#Actualmente la base de datos está conectada a postgres desde una base de datos externa para pruebas
 #Teniendo esto en cuenta proceder a escribir el comando:
 $ docker-compose up
 
