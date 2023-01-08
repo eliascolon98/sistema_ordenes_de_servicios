@@ -18,18 +18,15 @@ $cp docker-compose.yml.example docker-compose.yml
 #Teniendo esto en cuenta proceder a escribir el comando:
 $ docker-compose up
 
-#Una vez ejeccute el comando anterior ya podrá hacer pruebas o consumir los endpoint. 
+#Una vez ejecute el comando anterior ya podrá hacer pruebas o consumir los endpoint. 
 
 #Notas:
 #Si quiere hacer las peticiones a la base de datos que genera Docker lo unico que hay que hacer
 #es ajustar el archivo docker-compose.yml (si ya ejecutó el comando docker-compose up, deberá ejecutar
-#el comando docker-compose up para bajar los contenedores creados y luego volver a ejecutar 
-#docker-compose up para volver a subir los contenedores con los cmabios) y comentar las variables DB_HOST y BD_PASSWORD 
-#de la conexió externa #y descomentar las mismas variables de la conexion local, tambien tener en cuenta 
-#que hay que modificar el #archivo .ENV se hará el mismo procedimiento anterior.
-#y descomentar las que especifica que son para Docker ej: 
+#el comando docker-compose down para bajar los contenedores creados y luego volver a ejecutar 
+#docker-compose up para subir los contenedores con los cambios) y tener encuenta los siguiente.
 
-#Si se ejecuta directamente desde docker el backend el host de base de datos cambiar el archivo .ENV
+#Si se ejecuta directamente desde docker el backend el host de base de datos cambiar el archivo .env
 $ DB_HOST='postgresql2'
 $ BD_PASSWORD='eliascolon98'
 #si se encuentra fuera de docker, en local 
@@ -45,6 +42,7 @@ $ BD_PASS='ordenes_servicios_bd'
 #link de descarga https://www.docker.com/products/docker-desktop/  
 # de lo contrario tener la base de datos de proyecto lista para usar.
 
+#----------------------------------------------------------------------------------------
 
 #Para correr la App sin Docker, de forma local simplemente ejecutar el siguiente comando
 
