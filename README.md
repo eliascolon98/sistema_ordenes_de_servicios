@@ -36,7 +36,10 @@ $ DB_HOST='ordenesserviciosbd.cixqsl9wgrex.us-east-1.rds.amazonaws.com'
 $ BD_PASS='ordenes_servicios_bd'
 
 
-#Es necesario tener previamente instalado docker y docker-compose en tu equipo para que este proyecto funcione correctamente. #Si has seguido todos los pasos correctamente, deberías tener la base de datos de tu proyecto lista para usar
+#Es necesario tener previamente instalado docker y docker-compose en tu equipo para 
+#que este proyecto funcione correctamente. #Si has seguido todos los pasos correctamente, 
+#link de descarga https://www.docker.com/products/docker-desktop/  
+# de lo contrario tener la base de datos de proyecto lista para usar.
 
 
 #Para correr la App simplemente ejecutar el siguiente comando
