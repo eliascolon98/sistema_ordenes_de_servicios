@@ -1,8 +1,8 @@
 # sistema_ordenes_de_servicios
 Sistema de órdenes de servicio para una empresa que ofrece servicios de mantenimiento e instalación de soportes para televisores. Los clientes pueden hacer una solicitud de servicio generando un ticket a través del sistema, al cual se le debe generar un token y asignar a un técnico de forma aleatoria para que atienda la solicitud.
 ## Instalación
-
-# Instalación de dependencias para Node
+```bash
+#Instalación de dependencias para Node
 $ npm i
 #o
 $ yarn install
@@ -26,14 +26,14 @@ $ docker-compose up
 #y descomentar las que especifica que son para Docker ej: 
 
 #Si se ejecuta directamente desde docker el backend el host de base de datos cambiar el archivo .ENV
-#DB_HOST='postgresql2'
-#BD_PASSWORD='eliascolon98'
+$ DB_HOST='postgresql2'
+$ BD_PASSWORD='eliascolon98'
 #si se encuentra fuera de docker, en local 
-#DB_HOST='localhost'
-#BD_PASSWORD='eliascolon98'
+$ DB_HOST='localhost'
+$ BD_PASSWORD='eliascolon98'
 #si quiere conectar la base de datos externa:
-DB_HOST='ordenesserviciosbd.cixqsl9wgrex.us-east-1.rds.amazonaws.com'
-BD_PASS='ordenes_servicios_bd'
+$ DB_HOST='ordenesserviciosbd.cixqsl9wgrex.us-east-1.rds.amazonaws.com'
+$ BD_PASS='ordenes_servicios_bd'
 
 
 #Es necesario tener previamente instalado docker y docker-compose en tu equipo para que este proyecto funcione correctamente. #Si has seguido todos los pasos correctamente, deberías tener la base de datos de tu proyecto lista para usar
@@ -49,36 +49,35 @@ $ npm run start
 ```
 
 ## Endpoints
-``bash
+```bash
 #para local;
 $ http://localhost:3000/api/v1/
 #para produccion
 $ http://134.209.90.193:8080/api/v1/
-# Clientes:
+#Clientes:
 $ http://localhost:3000/api/v1/cliente                              # POST
 $ http://localhost:3000/api/v1/cliente                              # GET
 $ http://localhost:3000/api/v1/cliente/id_cliente                   # GET
 $ http://localhost:3000/api/v1/cliente/id_cliente                   # PUT
 $ http://localhost:3000/api/v1/cliente/id_cliente                   # DELETE
-# Tecnicos:
+#Tecnicos:
 $ http://localhost:3000/api/v1/tecnico                              # POST
 $ http://localhost:3000/api/v1/tecnico                              # GET
 $ http://localhost:3000/api/v1/tecnico/id_tecnico                   # GET
 $ http://localhost:3000/api/v1/tecnico/id_tecnico                   # PUT
 $ http://localhost:3000/api/v1/tecnico/id_tecnico                   # DELETE
-# Solicitud de Servicios
+#Solicitud de Servicios
 $ http://localhost:3000/api/v1/solicitudes                          # POST
 $ http://localhost:3000/api/v1/solicitudes                          # GET
 $ http://localhost:3000/api/v1/tecnicos/id_tecnico/solicitudes      # GET
 $ http://localhost:3000/api/v1/cliente/token                        #PUT                
-
 ```
 ## Documentación en Swagger 
 ```bash
 $ http://localhost:3000/api/v1/docs
 $ http://134.209.90.193:8080/api/v1/docs/
 ```
-## Testing o purbeas unitarias
+## Testing o pruebas unitarias
 ```bash
 $ npm run test
 ```
