@@ -43,7 +43,7 @@ BD_PASS='ordenes_servicios_bd'
 
 $ npm run dev
 
-#  Para correr la App en producción ejecutar el siguiente comando
+#Para correr la App en producción ejecutar el siguiente comando
 $ npm run build
 $ npm run start
 ```
