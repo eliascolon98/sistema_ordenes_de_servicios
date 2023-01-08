@@ -6,8 +6,8 @@ require('dotenv').config();
 
 let type:any = process.env.BD_DRIVE;
 let host:any = process.env.DB_HOST;
-let username:any = process.env.BD_USER;
-let password:any = process.env.BD_PASS;
+let username:any = process.env.BD_USERNAME;
+let password:any = process.env.BD_PASSWORD;
 let database:any = process.env.BD_NAME;
 let port:any = process.env.BD_PORT;
 
