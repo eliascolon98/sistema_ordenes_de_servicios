@@ -10,10 +10,10 @@ $ yarn install
 #Creación del archivo .ENV basado en el archivo .ENV.example
 $ cp .env.example .env
 
-# ----------------- Pasos para correr el proyecto ----------------
-# Paso uno:  Si no tiene una base de datos, puede crear una a traves de docker-compose.yml 
-# archivo basado en el docker-compose.yml.example archivo en el proyecto
-$ cp docker-compose.yml.example docker-compose.yml
+#----------------- Pasos para correr el proyecto ----------------
+#uno:  Si no tiene una base de datos, puede crear una a traves de docker-compose.yml 
+#archivo basado en el docker-compose.yml.example archivo en el proyecto
+$cp docker-compose.yml.example docker-compose.yml
 
 #Nota: Actualmente la base de datos está conectada a postgres desde una base de datos externa para pruebas
 #Teniendo esto en cuenta proceder a escribir el comando:
@@ -21,25 +21,25 @@ $ docker-compose up
 
 #Si quiere hacer las peticiones a la base de datos que genera Docker lo unico que hay que hacer
 #es ajustar el archivo docker-compose.yml y comentar las variables DB_HOST y BD_PASSWORD de la conexió externa 
-# y descomentar las mismas variables de la conexion local, tambien tener en cuenta que hay que modificar el
-# archivo .ENV se hará el mismo procedimiento anterior.
-# y descomentar las que especifica que son para Docker ej: 
+#y descomentar las mismas variables de la conexion local, tambien tener en cuenta que hay que modificar el
+#archivo .ENV se hará el mismo procedimiento anterior.
+#y descomentar las que especifica que son para Docker ej: 
 
-# Si se ejecuta directamente desde docker el backend el host de base de datos cambiar el archivo .ENV
-# DB_HOST='postgresql2'
-# BD_PASSWORD='eliascolon98'
-# si se encuentra fuera de docker, en local 
-# DB_HOST='localhost'
-# BD_PASSWORD='eliascolon98'
+#Si se ejecuta directamente desde docker el backend el host de base de datos cambiar el archivo .ENV
+#DB_HOST='postgresql2'
+#BD_PASSWORD='eliascolon98'
+#si se encuentra fuera de docker, en local 
+#DB_HOST='localhost'
+#BD_PASSWORD='eliascolon98'
 #si quiere conectar la base de datos externa:
 DB_HOST='ordenesserviciosbd.cixqsl9wgrex.us-east-1.rds.amazonaws.com'
 BD_PASS='ordenes_servicios_bd'
 
 
-# Es necesario tener previamente instalado docker y docker-compose en tu equipo para que este proyecto funcione correctamente. #Si has seguido todos los pasos correctamente, deberías tener la base de datos de tu proyecto lista para usar
+#Es necesario tener previamente instalado docker y docker-compose en tu equipo para que este proyecto funcione correctamente. #Si has seguido todos los pasos correctamente, deberías tener la base de datos de tu proyecto lista para usar
 
 
-## Para correr la App simplemente ejecutar el siguiente comando
+#Para correr la App simplemente ejecutar el siguiente comando
 
 $ npm run dev
 
@@ -49,8 +49,7 @@ $ npm run start
 ```
 
 ## Endpoints
-
-``bash`
+``bash
 #para local;
 $ http://localhost:3000/api/v1/
 #para produccion
