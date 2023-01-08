@@ -2,12 +2,12 @@
 Sistema de órdenes de servicio para una empresa que ofrece servicios de mantenimiento e instalación de soportes para televisores. Los clientes pueden hacer una solicitud de servicio generando un ticket a través del sistema, al cual se le debe generar un token y asignar a un técnico de forma aleatoria para que atienda la solicitud.
 ## Instalación
 
-# Instalacion de dependencias para Node
+# Instalación de dependencias para Node
 $ npm i
-# o
+#o
 $ yarn install
 
-# Creación del archivo .ENV basado en el archivo .ENV.example
+#Creación del archivo .ENV basado en el archivo .ENV.example
 $ cp .env.example .env
 
 # ----------------- Pasos para correr el proyecto ----------------
@@ -15,14 +15,14 @@ $ cp .env.example .env
 # archivo basado en el docker-compose.yml.example archivo en el proyecto
 $ cp docker-compose.yml.example docker-compose.yml
 
-# Nota: Actualmente la base de datos está conectada a posgrest desde una base de datos externa para pruebas
-# Teniendo esto en cuenta proceder a escribir el comando:
+#Nota: Actualmente la base de datos está conectada a postgres desde una base de datos externa para pruebas
+#Teniendo esto en cuenta proceder a escribir el comando:
 $ docker-compose up
 
-#si quiere hacer las peticiones a la base de datos que genera Docker lo unico que hay que hacer
+#Si quiere hacer las peticiones a la base de datos que genera Docker lo unico que hay que hacer
 #es ajustar el archivo docker-compose.yml y comentar las variables DB_HOST y BD_PASSWORD de la conexió externa 
 # y descomentar las mismas variables de la conexion local, tambien tener en cuenta que hay que modificar el
-# archivo .ENV se hará el mismo procedimiento anterior, comentar las variables DB_HOST y BD_PASSWORD de "produccion aws"
+# archivo .ENV se hará el mismo procedimiento anterior.
 # y descomentar las que especifica que son para Docker ej: 
 
 # Si se ejecuta directamente desde docker el backend el host de base de datos cambiar el archivo .ENV
